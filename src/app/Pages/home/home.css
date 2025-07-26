@@ -1,0 +1,103 @@
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    padding: 20px;
+}
+
+.main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 25px;
+    border: 3px solid #4a90e2;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+
+h1 {
+    text-align: center;
+    color: #4a4a4a;
+    margin-bottom: 30px;
+}
+
+.search-container {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.search-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.search-container input {
+    min-width: 300px;
+    padding: 10px 15px;
+    border: 2px solid #f5a623;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.search-container input:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(245, 166, 35, 0.5);
+}
+
+.tasks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px; 
+    margin-bottom: 40px;
+}
+.task-card {
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background: #fff;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative; /* Silme butonu için */
+    min-height: 150px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.task-card:hover {
+    transform: translateY(-5px); /* Kartın üzerine gelince hafifçe yükselmesi */
+}
+
+.card-content {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+    gap: 8px;
+}
+
+.edit-date {
+    font-size: 14px;
+    color: #777;
+}
+
+/* Versiyon Etiketi (Çizimdeki Kırmızı Kutu) */
+.version-badge {
+    color: white;
+    padding: 4px 12px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: #d0021b;
+}

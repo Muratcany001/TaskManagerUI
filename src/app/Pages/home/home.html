@@ -1,0 +1,69 @@
+<div>
+    <h1>Tasklarım</h1>
+
+    <div class="search-container">
+        <label for="search-box">Tasklarımda ara</label>
+        <input type="text" id="search-box" placeholder="İş, Okul...">
+    </div>
+
+    <div class="tasks-grid">
+        
+        <div class="task-card">
+            <button class="delete-btn">×</button>
+            <div class="card-content">
+                <p>...</p> </div>
+            <div class="card-footer">
+                <span class="version-badge">Versiyon 2</span>
+                <span class="edit-date">Son güncelleme tarihi: 15.07.2025</span>
+            </div>
+        </div>
+
+        <div class="task-card">
+            <button class="delete-btn">×</button>
+            <div class="card-content">
+                <p>Proje</p>
+            </div>
+            <div class="card-footer">
+                <span class="version-badge">Versiyon 1</span>
+                <span class="edit-date">Son güncelleme tarihi: 14.06.2025</span>
+            </div>
+        </div>
+
+        <div class="task-card">
+            <button class="delete-btn">×</button>
+            <div class="card-content">
+                <p>Okul</p>
+            </div>
+            <div class="card-footer">
+                <span class="version-badge">Versiyon 5</span>
+                <span class="edit-date">Son güncelleme tarihi: 11.07.2025</span>
+            </div>
+        </div>
+
+        <div class="task-card">
+            <button class="delete-btn">×</button>
+            <div class="card-content">
+                <p>Kişisel</p>
+            </div>
+            <div class="card-footer">
+                <span class="version-badge">Versiyon 2</span>
+                <span class="edit-date">Son güncelleme tarihi: 17.07.2025</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="actions-container">
+        <button class="add-task-btn">Yeni Task Oluştur</button>
+    </div>
+
+    <form id="add-task-form" style="display:none;">
+        <h3>Yeni Task Ekle</h3>
+        <input type="text" placeholder="Task başlığı">
+        <input type="text" placeholder="Task açıklaması">
+        <button type="submit">Task Ekle</button>
+    </form>
+
+    <span><a href="/login">Login</a></span>
+    <router-outlet></router-outlet>
+</div>
