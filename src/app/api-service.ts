@@ -66,8 +66,8 @@ export class ApiService {
     return this.http.get(`${this.apiUrl}/GetFirstUpdaterNameById/${taskId}`)
   }
 
-  CreateUsers():Observable<any>{
-    return this.http.post(`${this.apiUrl}/users/CreateUser`, {})
+  CreateUsers(user:any):Observable<any>{
+    return this.http.post(`${this.apiUrl}/users/CreateUser`, user)
   }
 
   UpdateUserByIds(id:number, password:string): Observable<any>{

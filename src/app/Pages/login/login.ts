@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule,ReactiveFormsModule,CommonModule],
+  imports: [FormsModule,ReactiveFormsModule,CommonModule,RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
@@ -50,8 +50,12 @@ ngOnInit(): void {
 
     this.apiService.login(user).subscribe({
       next: (response: any) => {
+        const userId = response?.userId;
+        localStorage.setItem("userId", userId.toString());
         console.log("Login yanıtı", response);
         this.errorMessage = "Giriş başarılı" 
+
+        console.log(userId);
         this.router.navigate([this.returnUrl]);
       },
       error: (error: any) => {

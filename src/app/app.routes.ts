@@ -5,12 +5,14 @@ import { Register } from './Pages/register/register';
 import { Header } from './Shared/header/header';
 import { Sidebar } from './Shared/sidebar/sidebar';
 import { Tasks } from './Pages/tasks/tasks';
+import { Auth } from './auth';
 
 export const routes: Routes = [
 
     {
         path: '',
-        component: Tasks
+        component: Tasks,
+        canActivate: [Auth]
     },
     {
         path: 'login',
@@ -22,25 +24,22 @@ export const routes: Routes = [
     },
     {
         path : 'header',
-        component : Header
+        component : Header,
+        canActivate: [Auth]
     },
     {
         path : 'sidebar',
-        component : Sidebar
+        component : Sidebar,
+        canActivate: [Auth]
     },
     {
         path : 'task',
-        component : Tasks
+        component : Tasks,
+        canActivate: [Auth]
     },
     {
         path : 'document',
-        component : Document
+        component : Document,
+        canActivate: [Auth]
     }
-
-
-
-
-
-
-
 ];
