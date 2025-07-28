@@ -7,7 +7,7 @@ import { Tasks } from './Pages/tasks/tasks';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = "https://localhost:7029";
+  private apiUrl = "https://localhost:7188";
   private headers = new HttpHeaders({
         'Content-Type': 'application/json',
         'Accept' : 'application/json'
@@ -35,14 +35,17 @@ export class ApiService {
   GetBackVersions(taskId:number, versionId: number, lastUpdaterId :number): Observable<any>{
     return this.http.patch(`${this.apiUrl}/version/GetBackVersion/${taskId}/${versionId}/${lastUpdaterId}`, {});
   }
+
   CreateTasks(task: Tasks): Observable<any>{
-    return this.http.post(`${this.apiUrl}/task/CreateTask`, {}, {headers: this.headers});
+    return this.http.post(`${this.apiUrl}/task/CreateTask`, task, {headers: this.headers});
   }
+
   UpdateTaskByIds(id:number): Observable<any>{
     return this.http.patch(`${this.apiUrl}/task/UpdateTaskById/${id}`, {});
   }
+
   DeleteTaskByIds(id:number){
-    return this.http.delete(`${this.apiUrl}/task/DeleteTaskById/${id}`,{});
+    return this.http.delete(`${this.apiUrl}/task/DeleteTaskById/${id}`);
   }
   GetAllTasks(): Observable<any>{
     return this.http.get(`${this.apiUrl}/task/GetAllTask`);
@@ -106,5 +109,8 @@ export class ApiService {
     return this.http.patch(`${this.apiUrl}/document/UpdateDocumentById/${id}/${filePath}`, {});
   }
 
+  login(user: {email: string, password: string}): Observable<any> {
+    return this.http.post(`${this.apiUrl}/users/Login`, user, {headers: this.headers});
+  }
 
 }
