@@ -6,6 +6,9 @@ import { Header } from './Shared/header/header';
 import { Sidebar } from './Shared/sidebar/sidebar';
 import { Tasks } from './Pages/tasks/tasks';
 import { Auth } from './auth';
+import { AddTask } from './Pages/add-task/add-task';
+import { Document } from './Pages/document/document';
+import { TaskVersion } from './Pages/task-version/task-version';
 
 export const routes: Routes = [
 
@@ -39,7 +42,26 @@ export const routes: Routes = [
     },
     {
         path : 'document',
-        component : Document,
+        children :[
+                {
+                    path: '', component: Tasks },
+                    {
+                        path : 'taskId/version', component: TaskVersion
+                    },
+                    {
+                        path: 'taskId/version/:versionId/documents', component : Document
+                    }
+        ],
+        canActivate: [Auth]
+    },
+    {
+        path: 'addTask',
+        component : AddTask,
+        canActivate: [Auth]
+    },
+    {
+        path: 'tasks/:id/versions',
+        component: TaskVersion,
         canActivate: [Auth]
     }
 ];

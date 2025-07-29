@@ -1,11 +1,19 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-document',
-  imports: [],
+  imports: [ReactiveFormsModule,CommonModule],
   templateUrl: './document.html',
-  styleUrl: './document.css'
+  styleUrls: ['./document.css']
 })
-export class Document {
+export class Document implements OnInit{
 
+
+  ngOnInit(): void {
+    
+  }
 }

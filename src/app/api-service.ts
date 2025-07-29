@@ -3,6 +3,38 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Tasks } from './Pages/tasks/tasks';
 
+export interface UserTask {
+  id?: number;
+  title: string;
+  description: string;
+  createdDate?: Date;
+  currentVersionId?: number;
+  firstUpdater?: number;
+  lastUpdater?: number;
+  currentVersion?: TaskVersion;
+  versions?: TaskVersion[];
+  documents?: TaskDocument[];
+}
+
+export interface TaskVersion {
+  id?: number;
+  versionNumber?: number;
+  status?: string;
+  time?: Date;
+  taskId?: number;
+  createdByUserId?: number;
+  documents?: TaskDocument[];
+}
+
+export interface TaskDocument {
+  id?: number;
+  title?: string;
+  createdDate?: Date;
+  filePath?: string;
+  taskId?: number;
+  taskVersionId?: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +49,7 @@ export class ApiService {
 
   GetAllVersionsByTaskIds(taskId : number): Observable<any>{
 
-    return this.http.get(`${this.apiUrl}/version/GetAllVersionsByTaskId/${taskId}`);
+    return this.http.get<any[]>(`${this.apiUrl}/version/GetAllVersionsByTaskId/${taskId}`);
   }
 
   GetNewVersions(taskId : number, lastUpdaterId : number, status : string): Observable<any>{
@@ -36,9 +68,10 @@ export class ApiService {
     return this.http.patch(`${this.apiUrl}/version/GetBackVersion/${taskId}/${versionId}/${lastUpdaterId}`, {});
   }
 
-  CreateTasks(task: Tasks): Observable<any>{
-    return this.http.post(`${this.apiUrl}/task/CreateTask`, task, {headers: this.headers});
-  }
+  CreateTask(task: Partial<UserTask>, userId: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/task/CreateTask?createdByUserId=${userId}`, task, {
+      headers: this.headers }); 
+    }
 
   UpdateTaskByIds(id:number): Observable<any>{
     return this.http.patch(`${this.apiUrl}/task/UpdateTaskById/${id}`, {});
@@ -62,8 +95,11 @@ export class ApiService {
   GetTaskByDates(date: string): Observable<any>{
     return this.http.get(`${this.apiUrl}/task/GetTaskByDate/${date}`);
   }
+  GetFirstUpdaterNameByIds(taskId:number): Observable<any>{
+    return this.http.get(`${this.apiUrl}/task/GetFirstUpdaterNameById/${taskId}`);
+  }
   GetLastUpdaterNameByIds(taskId:number): Observable<any>{
-    return this.http.get(`${this.apiUrl}/GetFirstUpdaterNameById/${taskId}`)
+    return this.http.get(`${this.apiUrl}/task/GetLastUpdaterNameById/${taskId}`);
   }
 
   CreateUsers(user:any):Observable<any>{
@@ -101,9 +137,11 @@ export class ApiService {
   GetDocumentById(documentId:number): Observable<any>{
     return this.http.get(`${this.apiUrl}/document/GetDocumentById/${documentId}`)
   }
+  
   GetAllDocuments(): Observable<any>{
     return this.http.get(`${this.apiUrl}/document/GetAllDocuments`)
   }
+  
   UpdateDocumentById(id:number, filePath:string): Observable<any>
   {
     return this.http.patch(`${this.apiUrl}/document/UpdateDocumentById/${id}/${filePath}`, {});
@@ -112,5 +150,6 @@ export class ApiService {
   login(user: {email: string, password: string}): Observable<any> {
     return this.http.post(`${this.apiUrl}/users/Login`, user, {headers: this.headers});
   }
+
 
 }
