@@ -12,17 +12,17 @@
       <h1 class="text-center mb-4 text-light">Tasklarım</h1>
       <h1 class="text-end" (click)="logOut()"> çıkış yap  </h1>
       <div class="mb-3">
-        <input type="text" class="form-control bg-light text-dark rounded-2" placeholder="Tasklarımda ara">
+        <input type="text" [(ngModel)]="searchText" class="form-control bg-light text-dark rounded-2" placeholder="Tasklarımda ara">
       </div>
 
       <div class="d-flex flex-column gap-3 mb-4" style="max-height: 60vh; overflow-y: auto;"> 
-        <a class="text-decoration-none " *ngFor="let task of tasks">
+        <a class="text-decoration-none " *ngFor="let task of filteredItems()">
           <div class="card bg-secondary text-white rounded-2 border border-secondary">
             <div  (click)="openVersions(task.id)" class="card-body d-flex justify-content-between align-items-center">
               <h6 >{{ task.title}}</h6>
               <small class="text-white-50">Oluşturulma tarihi {{task.createdDate | date:'medium'}}</small>
               <small class="text-white-50">Oluşturan {{ task.firstUpdaterName}}</small>
-              <button (click)="confirmDelete(task.id)"> Taskı sil </button>
+              <button (click)="confirmDelete(task.id); $event.stopPropagation()"> Taskı sil </button>
             </div>
           </div>
         </a>

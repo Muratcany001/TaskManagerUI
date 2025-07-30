@@ -49,18 +49,18 @@ export class ApiService {
 
   GetAllVersionsByTaskIds(taskId : number): Observable<any>{
 
-    return this.http.get<any[]>(`${this.apiUrl}/version/GetAllVersionsByTaskId/${taskId}`);
+    return this.http.get(`${this.apiUrl}/version/GetAllVersionsByTaskId/${taskId}`);
   }
 
   GetNewVersions(taskId : number, lastUpdaterId : number, status : string): Observable<any>{
-    return this.http.post(`${this.apiUrl}/version/GetNewVersion/${taskId}/${lastUpdaterId}/${status}`, {});
+    return this.http.post(`${this.apiUrl}/version/GetNewVersion?taskId=${taskId}&lastUpdaterId=${lastUpdaterId}&status=${status}`, {}, { headers: this.headers });
   }
 
   DeleteLatestVersions(taskId:number): Observable<any>{
     return this.http.delete(`${this.apiUrl}/version/DeleteLatestVersion/${taskId}`)
   }
   
-  GetLatestVersions(taskId:number, status:string): Observable<any>{
+  ChangeVersionStatus(taskId:number, status:string): Observable<any>{
     return this.http.get(`${this.apiUrl}/versions/ChangeVersionStatus/${taskId}/${status}`, {});
   }
 

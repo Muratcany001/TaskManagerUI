@@ -41,18 +41,12 @@ export const routes: Routes = [
         canActivate: [Auth]
     },
     {
-        path : 'document',
-        children :[
-                {
-                    path: '', component: Tasks },
-                    {
-                        path : 'taskId/version', component: TaskVersion
-                    },
-                    {
-                        path: 'taskId/version/:versionId/documents', component : Document
-                    }
-        ],
-        canActivate: [Auth]
+        path: 'document',
+        children: [
+            { path: '', component: Tasks },
+            { path: ':taskId/version', component: TaskVersion },
+            { path: ':taskId/version/:versionId/documents', component: Document }
+        ]
     },
     {
         path: 'addTask',

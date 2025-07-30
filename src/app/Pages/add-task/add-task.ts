@@ -18,6 +18,7 @@ export class AddTask implements OnInit{
   errorMessage : string ="";
   returnUrl :string="/"
   task: any[] = [];
+  private dialog = inject(Dialog);
  constructor(
   private route: ActivatedRoute,
   private router: Router,
@@ -32,8 +33,8 @@ export class AddTask implements OnInit{
 }
  ngOnInit(): void {
   this.route.queryParams.subscribe(params=> {
-    if (params["returnUrl"]){
-      this.returnUrl = params["returnUrl"];
+    if (params["/task"]){
+      this.returnUrl = params["/task"];
     }
   });
 }
@@ -54,11 +55,11 @@ addTask(): void {
     next: (response:any) => {
       console.log(response);
       alert("Task başarıyla eklendi")
-      const createdTaskId = response.id;
-      this.router.navigate(['/tasks', createdTaskId, 'documents']);
+      this.dialog.closeAll();
     },
     error: (error:any) =>{
       console.log("task ekleme hatası",error);
+      alert("Task eklenirken hata oluştu");
     }
   });}
 }

@@ -5,19 +5,28 @@ import { AddTask } from '../add-task/add-task';
 import { ApiService } from '../../api-service';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-tasks',
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule,ReactiveFormsModule,FormsModule],
   templateUrl: './tasks.html',
   styleUrl: './tasks.css'
 })
 export class Tasks implements OnInit {
   message: string = "";
   tasks: any[] = [];
+  searchText: string = "";
+
+
   private dialog = inject(Dialog);
   protected openModal (){
-    this.dialog.open(AddTask);
+    const dialogRef = this.dialog.open(AddTask);
+    dialogRef.closed.subscribe(() => {
+      setTimeout(() => {
+        this.GetAllTask();
+      }, 500);
+    });
   }
   
   constructor(private router: Router,
@@ -26,6 +35,8 @@ export class Tasks implements OnInit {
               private apiService : ApiService,
               private formBuilder : FormBuilder
   ){}
+
+  
 
   GetAllTask() : void{
     this.apiService.GetAllTasks().subscribe({
@@ -120,13 +131,15 @@ export class Tasks implements OnInit {
 confirmDelete(id:any){
   if (confirm("Silmek istediğinden emin misin?")){
     this.deleteTask(id);
+    this.GetAllTask();
   }
 }
 
   deleteTask(id: any) {
     this.apiService.DeleteTaskByIds(id).subscribe({
       next: (response: any) => {
-        this.tasks = this.tasks.filter(task => task.id !== id);
+        alert("Task başarıyla silindi");
+        this.GetAllTask();
       },
       error: (err: any) => {
         if (err.status === 404) {
@@ -134,5 +147,11 @@ confirmDelete(id:any){
         }
       }
     });
+  }
+
+  filteredItems(){
+    return this.tasks.filter(task =>
+      task.title.toLowerCase().includes(this.searchText.toLowerCase())
+    );
   }
 }
