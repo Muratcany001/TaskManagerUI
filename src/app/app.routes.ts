@@ -9,6 +9,7 @@ import { Auth } from './auth';
 import { AddTask } from './Pages/add-task/add-task';
 import { Document } from './Pages/document/document';
 import { TaskVersion } from './Pages/task-version/task-version';
+import { AddDocument } from './Pages/add-document/add-document';
 
 export const routes: Routes = [
 
@@ -44,8 +45,12 @@ export const routes: Routes = [
         path: 'document',
         children: [
             { path: '', component: Tasks },
+
             { path: ':taskId/version', component: TaskVersion },
-            { path: ':taskId/version/:versionId/documents', component: Document }
+            
+            { path: ':taskId/version/:versionId/documents', component: Document },
+
+            {path : ':taskId/version/:versionId/documents/:taskId/addDocument', component:AddDocument}
         ]
     },
     {
@@ -57,5 +62,11 @@ export const routes: Routes = [
         path: 'tasks/:id/versions',
         component: TaskVersion,
         canActivate: [Auth]
+    },
+    {
+        path: ':taskId/version/:versionId/documents/addDocument', 
+        component : AddDocument,
+        canActivate: [Auth]
     }
+
 ];

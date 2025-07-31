@@ -10,7 +10,7 @@
     <h1 class="text-center mb-4 text-light">{{taskName}}</h1>
     <h1 class="text-end" routerLink="/task"> Geri dön  </h1>
     <div class="mb-3">
-      <input  [(ngModel)]="searchText" type="text" class="form-control bg-light text-dark rounded-2"  placeholder="Tasklarımda ara" >
+      <input  [(ngModel)]="searchText" type="text" class="form-control bg-light text-dark rounded-2"  placeholder="Versiyonlarımda ara" >
     </div>
     <div class="text-center mb-3" *ngIf="filteredItems().length === 0">
       <p class="text-muted">Henüz versiyon bulunmuyor</p>

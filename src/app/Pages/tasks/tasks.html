@@ -22,7 +22,7 @@
               <h6 >{{ task.title}}</h6>
               <small class="text-white-50">Oluşturulma tarihi {{task.createdDate | date:'medium'}}</small>
               <small class="text-white-50">Oluşturan {{ task.firstUpdaterName}}</small>
-              <button (click)="confirmDelete(task.id); $event.stopPropagation()"> Taskı sil </button>
+              <button class="btn btn-primary shadow-sm" (click)="confirmDelete(task.id); $event.stopPropagation()"> Taskı sil </button>
             </div>
           </div>
         </a>

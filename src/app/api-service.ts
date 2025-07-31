@@ -29,7 +29,6 @@ export interface TaskVersion {
 export interface TaskDocument {
   id?: number;
   title?: string;
-  createdDate?: Date;
   filePath?: string;
   taskId?: number;
   taskVersionId?: number;
@@ -126,8 +125,8 @@ export class ApiService {
     return this.http.delete(`${this.apiUrl}/users/DeleteUserById/${id}`)
   }
   
-  CreateDocument(document : Document): Observable<any>{
-    return this.http.post(`${this.apiUrl}/document/CreateDocument`, {})
+  CreateDocument(taskId :number,document : TaskDocument): Observable<any>{
+    return this.http.post(`${this.apiUrl}/document/CreateDocument/${taskId}`, document)
   }
 
   DeleteDocument(documentId:number): Observable<any>{
@@ -151,5 +150,7 @@ export class ApiService {
     return this.http.post(`${this.apiUrl}/users/Login`, user, {headers: this.headers});
   }
 
-
+  GetVersionByVersionId(versionId:number):Observable<any>{
+    return this.http.get(`${this.apiUrl}/version/GetVersionByVersionId/${versionId}`);
+  }
 }

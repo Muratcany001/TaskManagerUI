@@ -23,7 +23,7 @@ export class TaskVersion implements OnInit {
                private fb : FormBuilder
             ) {}
   openDocuments(versionId: number, taskId:number) {
-    this.router.navigate(['/document', versionId, 'version', taskId, 'documents']);
+    this.router.navigate(['/document', taskId, 'version', versionId, 'documents']);
   }
   ngOnInit(): void {
     const taskId = this.route.snapshot.paramMap.get('id');
@@ -99,5 +99,8 @@ export class TaskVersion implements OnInit {
         }
       }
     })
+  }
+  DeleteLatestVersion(){
+    
   }
 }

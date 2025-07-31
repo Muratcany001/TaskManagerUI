@@ -18,7 +18,6 @@ export class Tasks implements OnInit {
   tasks: any[] = [];
   searchText: string = "";
 
-
   private dialog = inject(Dialog);
   protected openModal (){
     const dialogRef = this.dialog.open(AddTask);
@@ -28,15 +27,13 @@ export class Tasks implements OnInit {
       }, 500);
     });
   }
-  
+
   constructor(private router: Router,
               private route : ActivatedRoute,
               private fb : FormBuilder,
               private apiService : ApiService,
               private formBuilder : FormBuilder
   ){}
-
-  
 
   GetAllTask() : void{
     this.apiService.GetAllTasks().subscribe({
@@ -128,12 +125,12 @@ export class Tasks implements OnInit {
   goToLogin() {
     this.router.navigate(["/login"]);
   }
-confirmDelete(id:any){
-  if (confirm("Silmek istediğinden emin misin?")){
-    this.deleteTask(id);
-    this.GetAllTask();
+  confirmDelete(id:any){
+    if (confirm("Silmek istediğinden emin misin?")){
+      this.deleteTask(id);
+      this.GetAllTask();
+    }
   }
-}
 
   deleteTask(id: any) {
     this.apiService.DeleteTaskByIds(id).subscribe({
