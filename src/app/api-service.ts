@@ -58,9 +58,9 @@ export class ApiService {
   DeleteLatestVersions(taskId:number): Observable<any>{
     return this.http.delete(`${this.apiUrl}/version/DeleteLatestVersion/${taskId}`)
   }
-  
-  ChangeVersionStatus(taskId:number, status:string): Observable<any>{
-    return this.http.get(`${this.apiUrl}/versions/ChangeVersionStatus/${taskId}/${status}`, {});
+
+  ChangeVersionStatus(versionId:number, status:string): Observable<any>{
+    return this.http.post(`${this.apiUrl}/version/ChangeVersionStatus/${versionId}/${status}`, {});
   }
 
   GetBackVersions(taskId:number, versionId: number, lastUpdaterId :number): Observable<any>{

@@ -12,8 +12,8 @@
     <div class="mb-3">
       <input  [(ngModel)]="searchText" type="text" class="form-control bg-light text-dark rounded-2"  placeholder="Versiyonlarımda ara" >
     </div>
-    <div class="text-center mb-3" *ngIf="filteredItems().length === 0">
-      <p class="text-muted">Henüz versiyon bulunmuyor</p>
+    <div class="text-center mb-3 text-danger" *ngIf="filteredItems().length === 0">
+      <p class="text-danger">Bu isimde versiyon bulunmuyor</p>
     </div>
     <div class="text-decoration-none wd-2 py-3" *ngFor="let version of filteredItems()">
       <div class="card bg-secondary text-white rounded-2 border border-secondary">
@@ -21,19 +21,29 @@
           <h6>Versiyon:  V{{version.versionNumber}}</h6>
           <small class="text-white-50">Oluşturulma tarihi {{version.time | date:'medium'}} </small>
           <small class="text-white-50"> Durum: {{ version.status || 'Bilinmiyor'}} </small>
+          <div>
+        </div>
+        <div>
         </div>
       </div>
-    </div>
-    <div class="text-end">
-      <button class="border-secondary">
-        Son versiyonu sil
-      </button>
-      <select [(ngModel)]="selectedStatus" aria-label="Aktif/Deaktif">
-        <option value="">Durum seçin</option>
+      <small><select [(ngModel)]="version.status" (change)="ChangeStatusByTaskId(version.id, version.status)" aria-label="Aktif/Deaktif" class="btn btn-primary shadow-sm me-4 py-3">
+        <option value=""> Durum seçin</option>
         <option value="aktif">Aktif</option>
         <option value="deaktif">Deaktif</option>
       </select>
-      <button    class="btn btn-primary shadow-sm" (click)="GetNewVersion(taskId,+lastUpdater,selectedStatus)">Yeni versiyona geç</button>
+    </small>
+      </div>
+    </div>
+    <div class="text-end py-3">
+      <button class="btn btn-danger shadow-sm me-2 py-3" (click)="confirmDelete(taskId); $event.stopPropagation()">
+        Son versiyonu sil
+      </button>
+      <select [(ngModel)]="selectedStatus" aria-label="Aktif/Deaktif" class="btn btn-primary shadow-sm me-4 py-3">
+        <option value=""> Durum seçin</option>
+        <option value="aktif">Aktif</option>
+        <option value="deaktif">Deaktif</option>
+      </select>
+      <button    class="btn btn-primary shadow-sm py-3" (click)="GetNewVersion(taskId,+lastUpdater,selectedStatus)">Yeni versiyona geç</button>
     </div>
   </div>
 </div>

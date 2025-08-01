@@ -25,16 +25,16 @@
         <h6 class="mb-0">{{document.title}} </h6>
         <small class="text-white-50">Eklenme tarihi: {{document.createdDate | date:'medium'}} </small>
         <small class="text-white-50"> FilePath: {{document.filePath}} </small>
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown">
-                İşlemler
-              </button>
-                  <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item">Dokümanı Gör</a></li>
-                <li><a class="dropdown-item">Dokümanı Güncelle</a></li>
-                <li><a class="dropdown-item">Dokümanı sil</a></li>
-              </ul>
-              </div>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown">
+            İşlemler
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item">Dokümanı Gör</a></li>
+            <li><a class="dropdown-item">Dokümanı Güncelle</a></li>
+            <li><a class="dropdown-item" (click)="confirmDelete(document.id); $event.stopPropagation()">Dokümanı Sil</a></li>
+          </ul>
+        </div>
       </div>
     </div>     
     <div class="text-end">

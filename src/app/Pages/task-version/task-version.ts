@@ -63,13 +63,18 @@ export class TaskVersion implements OnInit {
       }
     });
   }
+  
   filteredItems(){
     return this.versions.filter(version =>
       (version.title && version.title.toLowerCase().includes(this.searchText.toLowerCase())) ||
       (version.versionNumber && version.versionNumber.toString().toLowerCase().includes(this.searchText.toLowerCase())) ||
       (version.status && version.status.toLowerCase().includes(this.searchText.toLowerCase()))
-    );
+    )
+    if (this.versions.length == 0){
+      console.log("versiyon bulunamadı");
+    }
   }
+
     GetNewVersion(taskId : number, lastUpdaterId : number, status : string){
     if (!status) {
       alert("Lütfen bir durum seçin");
@@ -88,10 +93,11 @@ export class TaskVersion implements OnInit {
       }
     });
   }
-  ChangeStatusByTaskId(taskId:number , status :string){
-    this.apiService.ChangeVersionStatus(taskId, status).subscribe({
+  ChangeStatusByTaskId(versionId:number, status :string){
+    this.apiService.ChangeVersionStatus(versionId, status).subscribe({
       next : (response:any) => {
         console.log(response);
+        console.log("istek başarılı");
       },
       error(err:any){
         if(err.status === 500){
@@ -100,7 +106,21 @@ export class TaskVersion implements OnInit {
       }
     })
   }
-  DeleteLatestVersion(){
-    
+  confirmDelete(id:any){
+    if (confirm("Silmek istediğinden emin misin?")){
+      this.DeleteLatestVersion(this.taskId);
+    }}
+
+  DeleteLatestVersion(taskId:number){
+    this.apiService.DeleteLatestVersions(this.taskId).subscribe({
+      next : (response:any) => {
+        console.log(response);
+        alert("En son versiyon başarıyla silindi");
+        this.GetAllVersionsByTaskId(this.taskId);
+      },
+      error(err:any){
+        console.log(err);
+      }
+    })
   }
 }

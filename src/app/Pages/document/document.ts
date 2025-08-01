@@ -66,8 +66,21 @@ export class Document implements OnInit {
   }
 
 
- 
+  confirmDelete(id:any){
+    if (confirm("Silmek istediğinden emin misin?")){
+      this.DeleteDocument(id);
+    }}
 
+DeleteDocument(documentId:number){
+  this.apiService.DeleteDocument(documentId).subscribe({
+    next: (response:any) => {
+      console.log(response);
+    },
+    error(err:any){
+      console.log(err);
+    }
+  })
+}
   private dialog = inject(Dialog);
   protected openModal() {
     const dialogRef = this.dialog.open(AddDocument, {
