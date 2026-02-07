@@ -1,33 +1,115 @@
- <title>Register TaskManager</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <body class="bg-dark">
-    <div class="container d-flex justify-content-center align-items-center vh-100">
-      <div class="card bg-secondary text-dark shadow rounded p-4" style="width: 400px;">
-        <h1 class="card-title text-center mb-4 fw-bold">Kayıt ol</h1>
-  
-        <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
-          <div class="mb-3 d-flex align-items-center">
-            <label for="name" class="me-3" style="width: 100px;">Kullanıcı adı:</label>
-            <input type="text" id="name" formControlName="name" class="form-control" placeholder="Kullanıcı adını gir">
-          </div>
-  
-          <div class="mb-3 d-flex align-items-center">
-            <label for="email" class="me-3" style="width: 100px;">Email:</label>
-            <input type="email" class="form-control" name="email" formControlName="email" id="email" placeholder="Email adresinizi girin">
-          </div>
-  
-          <div class="mb-4 d-flex align-items-center">
-            <label for="password" class="me-3" style="width: 100px;">Şifre:</label>
-            <input type="password" class="form-control" formControlName="password" name="password" id="password" placeholder="Şifrenizi girin">
-          </div>
-          <div *ngIf="errorMessage" class="alert alert-danger text-center py-1 my-2">
-            {{ errorMessage }}
-          </div>
-          <div class="d-grid">
-            <button type="submit" class="btn btn-dark rounded " [disabled]="registerForm.invalid">Kayıt ol</button>
-            <a routerLink="/login" class="btn btn-outline-dark rounded mt-2" >Giriş yap</a>
-          </div>
-        </form>
+<div
+  class="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-5 relative overflow-hidden">
+  <!-- Animated Background Orbs -->
+  <div
+    class="absolute top-0 -left-40 w-80 h-80 bg-black rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse">
+  </div>
+  <div
+    class="absolute bottom-0 -right-40 w-80 h-80 bg-black rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse">
+  </div>
+  <div
+    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse">
+  </div>
+
+  <!-- Register Card -->
+  <div class="relative z-10 w-full max-w-md">
+    <div class="backdrop-blur-xl bg-white/10 rounded-3xl shadow-2xl border border-white/20 p-10">
+      <!-- Brand Section -->
+      <div class="text-center mb-10">
+        <div
+          class="w-16 h-16 bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg shadow-purple-500/30 hover:scale-105 transition-transform duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+          </svg>
+        </div>
+        <h1 class="text-3xl font-bold text-white tracking-tight">Kayıt Ol</h1>
+        <p class="text-white/60 mt-2">Yeni hesap oluşturun</p>
       </div>
+
+      <!-- Register Form -->
+      <form [formGroup]="registerForm" (ngSubmit)="onRegister()" class="space-y-6">
+        <!-- Name Field -->
+        <div>
+          <label for="name" class="block text-sm font-semibold text-white/80 mb-2 uppercase tracking-wider">Kullanıcı
+            Adı</label>
+          <div class="relative">
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-white/40">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </span>
+            <input type="text" id="name" formControlName="name"
+              class="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all duration-300"
+              placeholder="Kullanıcı adınızı girin">
+          </div>
+        </div>
+
+        <!-- Email Field -->
+        <div>
+          <label for="email"
+            class="block text-sm font-semibold text-white/80 mb-2 uppercase tracking-wider">Email</label>
+          <div class="relative">
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-white/40">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </span>
+            <input type="email" id="email" formControlName="email"
+              class="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all duration-300"
+              placeholder="Email adresinizi girin">
+          </div>
+        </div>
+
+        <!-- Password Field -->
+        <div>
+          <label for="password"
+            class="block text-sm font-semibold text-white/80 mb-2 uppercase tracking-wider">Şifre</label>
+          <div class="relative">
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-white/40">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+            </span>
+            <input type="password" id="password" formControlName="password"
+              class="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all duration-300"
+              placeholder="Şifrenizi girin">
+          </div>
+        </div>
+
+        <!-- Error Message -->
+        <div *ngIf="errorMessage"
+          class="bg-red-500/20 border border-red-500/30 rounded-xl px-4 py-3 text-red-300 text-center text-sm animate-pulse">
+          {{ errorMessage }}
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit"
+          class="w-full py-4 bg-gradient-to-r from-black to-black text-white font-semibold rounded-xl shadow-lg shadow-black/30 hover:shadow-black/50 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 transition-all duration-300"
+          [disabled]="registerForm.invalid">
+          Kayıt Ol
+        </button>
+
+        <!-- Divider -->
+        <div class="flex items-center gap-4 my-6">
+          <div class="flex-1 h-px bg-white/10"></div>
+          <span class="text-white/40 text-xs uppercase tracking-widest">veya</span>
+          <div class="flex-1 h-px bg-white/10"></div>
+        </div>
+
+        <!-- Login Link -->
+        <a routerLink="/login"
+          class="block w-full py-4 text-center border border-white/20 text-white/80 font-medium rounded-xl hover:bg-white/5 hover:border-white/30 hover:text-white transition-all duration-300">
+          Giriş Yap
+        </a>
+      </form>
     </div>
-  </body>
+  </div>
+</div>

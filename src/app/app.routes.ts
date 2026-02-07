@@ -15,8 +15,12 @@ export const routes: Routes = [
 
     {
         path: '',
-        component: Tasks,
-        canActivate: [Auth]
+        redirectTo: 'task',
+        pathMatch: 'full'
+    },
+    {
+        path: '**',
+        redirectTo: 'task'
     },
     {
         path: 'login',
@@ -27,46 +31,32 @@ export const routes: Routes = [
         component: Register
     },
     {
-        path : 'header',
-        component : Header,
-        canActivate: [Auth]
+        path: 'header',
+        component: Header,
     },
     {
-        path : 'sidebar',
-        component : Sidebar,
-        canActivate: [Auth]
+        path: 'sidebar',
+        component: Sidebar,
     },
     {
-        path : 'task',
-        component : Tasks,
-        canActivate: [Auth]
+        path: 'task',
+        component: Tasks,
     },
     {
         path: 'document',
-        children: [
-            { path: '', component: Tasks },
-
-            { path: ':taskId/version', component: TaskVersion },
-            
-            { path: ':taskId/version/:versionId/documents', component: Document },
-
-            {path : ':taskId/version/:versionId/documents/:taskId/addDocument', component:AddDocument}
-        ]
+        component: Document,
     },
     {
         path: 'addTask',
-        component : AddTask,
-        canActivate: [Auth]
+        component: AddTask,
     },
     {
         path: 'tasks/:id/versions',
         component: TaskVersion,
-        canActivate: [Auth]
     },
     {
-        path: ':taskId/version/:versionId/documents/addDocument', 
-        component : AddDocument,
-        canActivate: [Auth]
+        path: ':taskId/version/:versionId/documents/addDocument',
+        component: AddDocument,
     }
 
 ];

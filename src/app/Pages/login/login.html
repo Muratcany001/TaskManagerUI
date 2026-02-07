@@ -1,35 +1,102 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<div class="container vh-100 d-flex justify-content-center align-items-center bg-dark">
-  <div class="card shadow rounded-4 p-4" style="width: 100%; max-width: 400px; background: #f8f9fa;">
-    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-      <div class="mb-4">
-        <h3 class="text-center fw-bold text-dark">Giriş yap</h3>
+<div
+  class="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-5 relative overflow-hidden">
+  <!-- Animated Background Orbs -->
+  <div
+    class="absolute top-0 -left-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse">
+  </div>
+  <div
+    class="absolute bottom-0 -right-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse animation-delay-2000">
+  </div>
+  <div
+    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse animation-delay-4000">
+  </div>
+
+  <!-- Login Card -->
+  <div class="relative z-10 w-full max-w-md">
+    <div class="backdrop-blur-xl bg-white/10 rounded-3xl shadow-2xl border border-white/20 p-10">
+      <!-- Brand Section -->
+      <div class="text-center mb-10">
+        <div
+          class="w-16 h-16 bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg shadow-purple-500/30 hover:scale-105 transition-transform duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+          </svg>
+        </div>
+        <h1 class="text-3xl font-bold text-white tracking-tight">Hoş Geldiniz</h1>
+        <p class="text-white/60 mt-2">Devam etmek için giriş yapın</p>
       </div>
-      <div class="mb-3">
-        <label for="userName" class="form-label fw-semibold text-dark">Kullanıcı Adı</label>
-        <input type="text"
-               id="userName"
-               formControlName="email"
-               required
-               class="form-control"
-               placeholder="Kullanıcı adınızı girin">
+
+      <!-- Login Form -->
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="space-y-6">
+        <!-- Username Field -->
+        <div>
+          <label for="userName"
+            class="block text-sm font-semibold text-white/80 mb-2 uppercase tracking-wider">Kullanıcı Adı</label>
+          <div class="relative">
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-white/40">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </span>
+            <input type="text" id="userName" formControlName="email" required
+              class="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all duration-300"
+              placeholder="Kullanıcı adınızı girin">
+          </div>
+        </div>
+
+        <!-- Password Field -->
+        <div>
+          <label for="userPassword"
+            class="block text-sm font-semibold text-white/80 mb-2 uppercase tracking-wider">Şifre</label>
+          <div class="relative">
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-white/40">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+            </span>
+            <input type="password" id="userPassword" formControlName="password" required
+              class="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all duration-300"
+              placeholder="Şifrenizi girin">
+          </div>
+        </div>
+
+        <!-- Error Message -->
+        <div *ngIf="errorMessage"
+          class="bg-red-500/20 border border-red-500/30 rounded-xl px-4 py-3 text-red-300 text-center text-sm animate-pulse">
+          {{ errorMessage }}
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit"
+          class="w-full py-4 bg-gradient-to-r from-violet-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 transition-all duration-300"
+          [disabled]="loginForm.invalid">
+          Giriş Yap
+        </button>
+
+        <!-- Divider -->
+        <div class="flex items-center gap-4 my-6">
+          <div class="flex-1 h-px bg-white/10"></div>
+          <span class="text-white/40 text-xs uppercase tracking-widest">veya</span>
+          <div class="flex-1 h-px bg-white/10"></div>
+        </div>
+
+        <!-- Register Link -->
+        <a routerLink="/register"
+          class="block w-full py-4 text-center border border-white/20 text-white/80 font-medium rounded-xl hover:bg-white/5 hover:border-white/30 hover:text-white transition-all duration-300">
+          Hesap Oluştur
+        </a>
+      </form>
+
+      <!-- Footer -->
+      <div class="text-center mt-8 pt-6 border-t border-white/5">
+        <p class="text-white/30 text-sm">Task Manager © 2026</p>
       </div>
-      <div class="mb-3">
-        <label for="userPassword" class="form-label fw-semibold text-dark">Şifre</label>
-        <input type="password"
-               id="userPassword"
-               formControlName="password"
-               required
-               class="form-control"
-               placeholder="Şifrenizi girin">
-      </div>
-      <div *ngIf="errorMessage" class="alert alert-danger text-center py-1 my-2">
-        {{ errorMessage }}
-      </div>
-      <div class="d-grid">
-        <button type="submit" class="btn btn-dark rounded" [disabled]="loginForm.invalid">Giriş yap</button>
-        <a routerLink="/register" class="btn btn-outline-dark rounded mt-2">Kayıt ol</a>
-      </div>
-    </form>
+    </div>
   </div>
 </div>
